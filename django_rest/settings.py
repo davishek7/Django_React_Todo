@@ -136,6 +136,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 CORS_ALLOWED_ORIGINS = [
 
     "http://localhost:3000",
+    "https://avishek-tasks.herokuapp.com/"
 ]
 
 if os.getcwd() == '/app':
