@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+asgiref = "==3.3.1"
+django-cors-headers = "==3.5.0"
+djangorestframework = "==3.12.2"
+pytz = "==2020.4"
+sqlparse = "==0.4.1"
+Django = "==3.1.4"
+whitenoise = "*"
+gunicorn = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
