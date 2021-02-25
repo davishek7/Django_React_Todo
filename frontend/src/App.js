@@ -48,7 +48,7 @@ class App extends React.Component {
   fetchTasks(){
     console.log('Fetching...')
 
-    fetch('process.env.url/api/task-list/')
+    fetch('/api/task-list/')
     .then(response => response.json())
     .then(data => 
       this.setState({
@@ -77,10 +77,10 @@ class App extends React.Component {
 
     var csrftoken = this.getCookie('csrftoken')
 
-    var url = 'process.env.url/api/task-create/'
+    var url = '/api/task-create/'
 
     if(this.state.editing == true){
-      url = `process.env.url/api/task-update/${ this.state.activeItem.id}/`
+      url = `/api/task-update/${ this.state.activeItem.id}/`
       this.setState({
         editing:false
       })
@@ -93,6 +93,7 @@ class App extends React.Component {
       headers:{
         'Content-type':'application/json',
         'X-CSRFToken':csrftoken,
+        'Access-Control-Allow-Origin':'*',
       },
       body:JSON.stringify(this.state.activeItem)
     }).then((response)  => {
@@ -121,11 +122,12 @@ class App extends React.Component {
   deleteItem(task){
     var csrftoken = this.getCookie('csrftoken')
 
-    fetch(`process.env.url/api/task-delete/${task.id}/`, {
+    fetch(`/api/task-delete/${task.id}/`, {
       method:'DELETE',
       headers:{
         'Content-type':'application/json',
         'X-CSRFToken':csrftoken,
+        'Access-Control-Allow-Origin':'*',
       },
     }).then((response) =>{
 
@@ -138,13 +140,14 @@ class App extends React.Component {
 
     task.completed = !task.completed
     var csrftoken = this.getCookie('csrftoken')
-    var url = `process.env.url/api/task-update/${task.id}/`
+    var url = `/api/task-update/${task.id}/`
 
       fetch(url, {
         method:'POST',
         headers:{
           'Content-type':'application/json',
           'X-CSRFToken':csrftoken,
+          'Access-Control-Allow-Origin':'*',
         },
         body:JSON.stringify({'completed': task.completed, 'title':task.title})
       }).then(() => {
