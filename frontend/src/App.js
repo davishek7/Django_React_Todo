@@ -78,9 +78,11 @@ class App extends React.Component {
     var csrftoken = this.getCookie('csrftoken')
 
     var url = '/api/task-create/'
+    var method = 'POST'
 
-    if(this.state.editing == true){
-      url = `/api/task-update/${ this.state.activeItem.id}/`
+    if(this.state.editing === true){
+      url = `/api/task-update/${this.state.activeItem.id}/`
+      method = 'PUT'
       this.setState({
         editing:false
       })
@@ -89,11 +91,10 @@ class App extends React.Component {
 
 
     fetch(url, {
-      method:'POST',
+      method: method,
       headers:{
         'Content-type':'application/json',
         'X-CSRFToken':csrftoken,
-        'Access-Control-Allow-Origin':'*',
       },
       body:JSON.stringify(this.state.activeItem)
     }).then((response)  => {
@@ -127,7 +128,6 @@ class App extends React.Component {
       headers:{
         'Content-type':'application/json',
         'X-CSRFToken':csrftoken,
-        'Access-Control-Allow-Origin':'*',
       },
     }).then((response) =>{
 
@@ -143,11 +143,10 @@ class App extends React.Component {
     var url = `/api/task-update/${task.id}/`
 
       fetch(url, {
-        method:'POST',
+        method:'PUT',
         headers:{
           'Content-type':'application/json',
           'X-CSRFToken':csrftoken,
-          'Access-Control-Allow-Origin':'*',
         },
         body:JSON.stringify({'completed': task.completed, 'title':task.title})
       }).then(() => {
@@ -187,7 +186,7 @@ class App extends React.Component {
 
                             <div onClick={() => self.strikeUnstrike(task)} style={{flex:7}}>
 
-                                {task.completed == false ? (
+                                {task.completed === false ? (
                                     <span>{task.title}</span>
 
                                   ) : (
